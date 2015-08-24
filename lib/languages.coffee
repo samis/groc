@@ -104,6 +104,39 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
+  # This is a clone of the coffee-script definition above plus the `literateCode`
+  # defintion below.
+  #
+  # @see http://ashkenas.com/literate-coffeescript
+  # @see http://coffeescript.org/#literate
+  LiterateCoffeeScript:
+    # The second name-matcher `'.coffee.md'` is untested and might conflict
+    # with the plain markdown-definition above.
+    nameMatchers:      ['.litcoffee', '.coffee.md']
+    pygmentsLexer:     'coffee-script'
+    highlightJS:       'coffeescript'
+    # Syntax: `[ startMatcher, lineMatcher ]`
+    # - _startMatcher_ :
+    #   A literate coffee-script code-block requires an introducing empty line,
+    #   hence an empty string to distinguish code from nested bullet-lists, as
+    #   described in the `canCode` flag initialization in `lib/utils.coffee`.
+    # - _lineMatcher_ :
+    #   Literate coffee-script is the sum of all code-blocks in a markdown-file.
+    #   This prefix will be stripped from every code-line and the resulting
+    #   code will be processed by `pygments`.
+    literateCode:      [
+      '', '    '
+    ]
+    # Everything below `literateCode` is used to match the code we detected
+    multiLineComment:  [
+      '###*',   ' *',   ' ###',
+      '###' ,   '#' ,   '###'
+    ]
+    strictMultiLineEnd:false
+    singleLineComment: ['#']
+    ignorePrefix:      '}'
+    foldPrefix:        '^'
+
   Go:
     nameMatchers:      ['.go']
     pygmentsLexer:     'go'
